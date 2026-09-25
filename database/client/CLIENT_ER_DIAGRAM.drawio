@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2026-09-23T00:00:00.000Z" agent="Codex" version="26.0.14" type="device">
+  <diagram id="client-er" name="Client ER Diagram">
+    <mxGraphModel dx="1434" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="&lt;b&gt;AI Freelancer Matcher — Client Data Model&lt;/b&gt;&lt;br&gt;Client and company profile" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="315" y="30" width="540" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="client" value="&lt;b&gt;CLIENTS&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#7C3AED&quot;&gt;&lt;b&gt;PK&lt;/b&gt; id&lt;/font&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Contact&lt;/b&gt;&lt;br&gt;name&lt;br&gt;email (unique)&lt;br&gt;phone&lt;br&gt;photo&lt;br&gt;&lt;br&gt;&lt;b&gt;Company&lt;/b&gt;&lt;br&gt;company_name&lt;br&gt;job_title&lt;br&gt;company_website&lt;br&gt;industry&lt;br&gt;company_size&lt;br&gt;&lt;br&gt;&lt;b&gt;Preferences&lt;/b&gt;&lt;br&gt;location&lt;br&gt;timezone&lt;br&gt;languages []&lt;br&gt;bio&lt;br&gt;&lt;br&gt;&lt;b&gt;Trust &amp;amp; audit&lt;/b&gt;&lt;br&gt;is_verified&lt;br&gt;created_at&lt;br&gt;updated_at" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontColor=#4C1D95;align=left;verticalAlign=top;spacingTop=12;spacingLeft=14;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="390" y="120" width="340" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="client-request" value="&lt;b&gt;CLIENT_REQUESTS&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#D97706&quot;&gt;&lt;b&gt;PK&lt;/b&gt; id&lt;/font&gt;&lt;br&gt;&lt;font color=&quot;#D97706&quot;&gt;&lt;b&gt;FK&lt;/b&gt; client_id → clients.id&lt;/font&gt;&lt;br&gt;&lt;br&gt;title&lt;br&gt;raw_request&lt;br&gt;required_skills []&lt;br&gt;languages []&lt;br&gt;work_field&lt;br&gt;freelancers_needed&lt;br&gt;start_date&lt;br&gt;deadline&lt;br&gt;budget_min, budget_max&lt;br&gt;currency&lt;br&gt;status&lt;br&gt;created_at&lt;br&gt;updated_at" style="shape=rectangle;rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontColor=#7C2D12;align=left;verticalAlign=top;spacingTop=12;spacingLeft=14;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="790" y="175" width="310" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="client-request-relationship" value="submits: 1 → many" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;endFill=0;startArrow=ERone;startFill=0;strokeWidth=2;strokeColor=#4B5563;fontSize=12;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="client" target="client-request">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

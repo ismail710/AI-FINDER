@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1160" viewBox="0 0 1600 1160" role="img" aria-labelledby="title description">
+  <title id="title">AI Freelancer Matcher overall class diagram</title>
+  <desc id="description">Python classes for users, portfolio projects, client requests, and AI matching records.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker>
+    <marker id="inheritance" markerWidth="14" markerHeight="14" refX="12" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M0,6 L12,0 L12,12 z" fill="#ffffff" stroke="#475569" stroke-width="1.5"/></marker>
+    <style>
+      .canvas { fill: #f8fafc; }
+      .title { font: 700 26px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 14px Arial, sans-serif; fill: #475569; }
+      .class { fill: #ffffff; stroke: #64748b; stroke-width: 1.5; rx: 8; }
+      .user { fill: #eff6ff; stroke: #2563eb; }
+      .freelancer { fill: #f0fdf4; stroke: #16a34a; }
+      .client { fill: #faf5ff; stroke: #9333ea; }
+      .project { fill: #fff7ed; stroke: #d97706; }
+      .ai { fill: #fdf4ff; stroke: #c026d3; }
+      .focus { fill: #fff1f2; stroke: #e11d48; stroke-width: 3; }
+      .class-title { font: 700 15px Arial, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .attribute { font: 12px 'Courier New', monospace; fill: #334155; }
+      .line { stroke: #cbd5e1; stroke-width: 1; }
+      .relation { fill: none; stroke: #475569; stroke-width: 1.8; marker-end: url(#arrow); }
+      .inheritance { fill: none; stroke: #475569; stroke-width: 1.8; marker-end: url(#inheritance); }
+      .relation-label { font: 12px Arial, sans-serif; fill: #334155; }
+      .focus-label { font: 700 13px Arial, sans-serif; fill: #be123c; }
+      .legend { font: 12px Arial, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect class="canvas" x="0" y="0" width="1600" height="1160"/>
+  <text class="title" x="800" y="42" text-anchor="middle">AI Freelancer Matcher — Overall Python Class Diagram</text>
+  <text class="subtitle" x="800" y="68" text-anchor="middle">Shared user account, portfolio, client request, and AI retrieval / matching models</text>
+
+  <!-- User -->
+  <g transform="translate(620 105)">
+    <rect class="class user" width="360" height="205"/>
+    <text class="class-title" x="180" y="28">User (base class)</text>
+    <line class="line" x1="0" y1="42" x2="360" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">name: str</text>
+    <text class="attribute" x="18" y="111">email: str</text>
+    <text class="attribute" x="18" y="133">age: int | None</text>
+    <text class="attribute" x="18" y="155">photo: str | None</text>
+    <text class="attribute" x="18" y="177">role: UserRole</text>
+    <text class="attribute" x="195" y="177">is_verified: bool</text>
+    <text class="attribute" x="18" y="197">+ touch()</text>
+  </g>
+
+  <!-- Freelancer -->
+  <g transform="translate(190 385)">
+    <rect class="class freelancer" width="390" height="335"/>
+    <text class="class-title" x="195" y="28">Freelancer : User</text>
+    <line class="line" x1="0" y1="42" x2="390" y2="42"/>
+    <text class="attribute" x="18" y="67">bio: str</text>
+    <text class="attribute" x="18" y="89">portfolio: str | None</text>
+    <text class="attribute" x="18" y="111">interests: list[str]</text>
+    <text class="attribute" x="18" y="133">languages: list[str]</text>
+    <text class="attribute" x="18" y="155">skills: list[str]</text>
+    <text class="attribute" x="18" y="177">work_field: str</text>
+    <text class="attribute" x="18" y="199">experience_years: int | None</text>
+    <text class="attribute" x="18" y="221">location, timezone: str | None</text>
+    <text class="attribute" x="18" y="243">hourly_rate: Decimal | None</text>
+    <text class="attribute" x="18" y="265">availability_status: AvailabilityStatus</text>
+    <text class="attribute" x="18" y="287">project_ids: list[str]</text>
+    <text class="attribute" x="18" y="317">+ add_project(project_id)</text>
+  </g>
+
+  <!-- Client -->
+  <g transform="translate(1020 385)">
+    <rect class="class client" width="390" height="335"/>
+    <text class="class-title" x="195" y="28">Client : User</text>
+    <line class="line" x1="0" y1="42" x2="390" y2="42"/>
+    <text class="attribute" x="18" y="67">phone: str | None</text>
+    <text class="attribute" x="18" y="89">company_name: str | None</text>
+    <text class="attribute" x="18" y="111">job_title: str | None</text>
+    <text class="attribute" x="18" y="133">company_website: str | None</text>
+    <text class="attribute" x="18" y="155">industry: str | None</text>
+    <text class="attribute" x="18" y="177">company_size: CompanySize | None</text>
+    <text class="attribute" x="18" y="199">location, timezone: str | None</text>
+    <text class="attribute" x="18" y="221">languages: list[str]</text>
+    <text class="attribute" x="18" y="243">bio: str</text>
+    <text class="attribute" x="18" y="265">request_ids: list[str]</text>
+    <text class="attribute" x="18" y="317">+ add_request(request_id)</text>
+  </g>
+
+  <!-- Project -->
+  <g transform="translate(75 810)">
+    <rect class="class project" width="310" height="255"/>
+    <text class="class-title" x="155" y="28">Project</text>
+    <line class="line" x1="0" y1="42" x2="310" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">freelancer_id: str</text>
+    <text class="attribute" x="18" y="111">title: str</text>
+    <text class="attribute" x="18" y="133">detail: str</text>
+    <text class="attribute" x="18" y="155">photos: list[str]</text>
+    <text class="attribute" x="18" y="177">skills_used: list[str]</text>
+    <text class="attribute" x="18" y="199">role: str | None</text>
+    <text class="attribute" x="18" y="221">is_public: bool</text>
+  </g>
+
+  <!-- ClientRequest -->
+  <g transform="translate(470 810)">
+    <rect class="class project" width="320" height="255"/>
+    <text class="class-title" x="160" y="28">ClientRequest</text>
+    <line class="line" x1="0" y1="42" x2="320" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">client_id: str</text>
+    <text class="attribute" x="18" y="111">title: str</text>
+    <text class="attribute" x="18" y="133">raw_request: str</text>
+    <text class="attribute" x="18" y="155">required_skills: list[str]</text>
+    <text class="attribute" x="18" y="177">freelancers_needed: int</text>
+    <text class="attribute" x="18" y="199">budget_min, budget_max: Decimal</text>
+    <text class="attribute" x="18" y="221">status: RequestStatus</text>
+  </g>
+
+  <!-- AI Request Analysis -->
+  <g transform="translate(875 800)">
+    <rect class="class ai" width="310" height="275"/>
+    <text class="class-title" x="155" y="28">AIRequestAnalysis</text>
+    <line class="line" x1="0" y1="42" x2="310" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">client_request_id: str</text>
+    <text class="attribute" x="18" y="111">problem_summary: str</text>
+    <text class="attribute" x="18" y="133">required_skills: list[str]</text>
+    <text class="attribute" x="18" y="155">roles_needed: list[str]</text>
+    <text class="attribute" x="18" y="177">freelancers_needed: int</text>
+    <text class="attribute" x="18" y="199">clarifying_questions: list[str]</text>
+    <text class="attribute" x="18" y="221">model_name: str</text>
+    <text class="attribute" x="18" y="243">prompt_version: str</text>
+  </g>
+
+  <!-- Match Run -->
+  <g transform="translate(1270 810)">
+    <rect class="class focus" width="270" height="255"/>
+    <text class="class-title" x="135" y="28">AIMatchRun</text>
+    <line class="line" x1="0" y1="42" x2="270" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">client_request_id: str</text>
+    <text class="attribute" x="18" y="111">analysis_id: str</text>
+    <text class="attribute" x="18" y="133">retrieval_method: str</text>
+    <text class="attribute" x="18" y="155">candidate_count: int</text>
+    <text class="attribute" x="18" y="177">status: MatchRunStatus</text>
+    <text class="attribute" x="18" y="199">model_name: str | None</text>
+  </g>
+
+  <!-- AI Match Result -->
+  <g transform="translate(1210 120)">
+    <rect class="class focus" width="310" height="230"/>
+    <text class="class-title" x="155" y="28">AIMatchResult</text>
+    <line class="line" x1="0" y1="42" x2="310" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">match_run_id: str</text>
+    <text class="attribute" x="18" y="111">freelancer_id: str</text>
+    <text class="attribute" x="18" y="133">rank: int</text>
+    <text class="attribute" x="18" y="155">overall_score: Decimal</text>
+    <text class="attribute" x="18" y="177">score breakdown: Decimal</text>
+    <text class="attribute" x="18" y="199">match_explanation: str</text>
+  </g>
+
+  <!-- Freelancer Embedding -->
+  <g transform="translate(75 120)">
+    <rect class="class ai" width="330" height="220"/>
+    <text class="class-title" x="165" y="28">FreelancerEmbedding</text>
+    <line class="line" x1="0" y1="42" x2="330" y2="42"/>
+    <text class="attribute" x="18" y="67">id: str</text>
+    <text class="attribute" x="18" y="89">freelancer_id: str</text>
+    <text class="attribute" x="18" y="111">source_type: EmbeddingSourceType</text>
+    <text class="attribute" x="18" y="133">source_id: str</text>
+    <text class="attribute" x="18" y="155">content: str</text>
+    <text class="attribute" x="18" y="177">embedding: list[float]</text>
+    <text class="attribute" x="18" y="199">embedding_model: str</text>
+  </g>
+
+  <!-- Inheritance relationships -->
+  <path class="inheritance" d="M385 385 L385 330 L620 330 L620 235"/>
+  <text class="relation-label" x="440" y="352">inherits</text>
+  <path class="inheritance" d="M1215 385 L1215 330 L980 330 L980 235"/>
+  <text class="relation-label" x="1090" y="352">inherits</text>
+
+  <!-- Business relationships -->
+  <path class="relation" d="M385 680 L385 810"/>
+  <text class="relation-label" x="397" y="757">1 owns 0..*</text>
+  <path class="relation" d="M1215 720 L790 720 L790 938"/>
+  <text class="relation-label" x="950" y="710">1 submits 0..*</text>
+
+  <!-- AI relationships -->
+  <path class="relation" d="M405 230 L620 230"/>
+  <text class="relation-label" x="448" y="218">1 embeds 0..*</text>
+  <path class="relation" d="M790 938 L875 938"/>
+  <text class="relation-label" x="805" y="928">1 analysed as 0..*</text>
+  <path class="relation" d="M1185 938 L1270 938"/>
+  <text class="relation-label" x="1198" y="928">1 creates 0..*</text>
+  <path class="relation" d="M1405 810 L1405 350"/>
+  <text class="relation-label" x="1417" y="585">1 produces 0..*</text>
+  <path class="relation" d="M580 552 L1210 260"/>
+  <text class="relation-label" x="845" y="390">freelancer appears in 0..* results</text>
+
+  <text class="focus-label" x="1390" y="790" text-anchor="middle">MATCHING EXECUTION</text>
+  <text class="focus-label" x="1365" y="105" text-anchor="middle">CLIENT-FACING RECOMMENDATION</text>
+
+  <!-- Legend -->
+  <g transform="translate(40 1105)">
+    <rect x="0" y="-13" width="14" height="14" fill="#eff6ff" stroke="#2563eb"/>
+    <text class="legend" x="20" y="-2">Base user</text>
+    <rect x="120" y="-13" width="14" height="14" fill="#f0fdf4" stroke="#16a34a"/>
+    <text class="legend" x="140" y="-2">Freelancer</text>
+    <rect x="260" y="-13" width="14" height="14" fill="#faf5ff" stroke="#9333ea"/>
+    <text class="legend" x="280" y="-2">Client</text>
+    <rect x="360" y="-13" width="14" height="14" fill="#fff7ed" stroke="#d97706"/>
+    <text class="legend" x="380" y="-2">Core record</text>
+    <rect x="490" y="-13" width="14" height="14" fill="#fdf4ff" stroke="#c026d3"/>
+    <text class="legend" x="510" y="-2">AI record</text>
+  </g>
+</svg>
