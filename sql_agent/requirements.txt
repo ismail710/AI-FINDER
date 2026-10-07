@@ -1,0 +1,10 @@
+# Dependencies for sql_agent/agent.py
+langchain-community>=0.3.0
+langchain>=1.0.0
+langchain-huggingface>=1.2.2
+langchain-openai>=1.0.0
+langchain-ollama>=1.1.0
+python-dotenv>=1.0.1
+pandas>=2.0.0
+huggingface-hub>=0.30.0
+SQLAlchemy>=2.0.0

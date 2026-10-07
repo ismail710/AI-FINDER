@@ -1,0 +1,9 @@
+.env
+.ollama_models/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+dist/
+build/
+

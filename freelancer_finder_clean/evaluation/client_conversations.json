@@ -1,0 +1,174 @@
+[
+  {
+    "id": "en_dental_booking",
+    "language": "en",
+    "question": "I want a booking website for my dental clinic.",
+    "expected_route": "match",
+    "expected_terms_any": ["web", "software", "booking", "appointment"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_ecommerce",
+    "language": "en",
+    "question": "Build an online shop for a small clothing brand with card payments.",
+    "expected_route": "match",
+    "expected_terms_any": ["e-commerce", "commerce", "web", "payment"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "fr_restaurant_booking",
+    "language": "fr",
+    "question": "Je veux un site pour réserver des tables dans mon restaurant.",
+    "expected_route": "match",
+    "expected_terms_any": ["web", "booking", "reservation", "réservation"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "fr_brand_identity",
+    "language": "fr",
+    "question": "Je cherche quelqu'un pour créer le logo et l'identité visuelle de ma marque.",
+    "expected_route": "match",
+    "expected_terms_any": ["brand", "branding", "graphic", "logo"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_explicit_react",
+    "language": "en",
+    "question": "Find a developer who must know React.",
+    "expected_route": "match",
+    "expected_terms_any": ["react", "frontend", "web"],
+    "expected_constraint_fields": ["required_skills"]
+  },
+  {
+    "id": "en_theme_not_skill",
+    "language": "en",
+    "question": "Build a web application with AI assistance.",
+    "expected_route": "match",
+    "expected_terms_any": ["web", "software", "ai"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_hourly_ceiling",
+    "language": "en",
+    "question": "Find an available Django developer under 60 USD per hour.",
+    "expected_route": "match",
+    "expected_terms_any": ["django", "python", "developer"],
+    "expected_constraint_fields": ["availability_status", "max_hourly_rate", "currency"]
+  },
+  {
+    "id": "en_total_budget",
+    "language": "en",
+    "question": "My total project budget is 5000 USD for a customer portal.",
+    "expected_route": "match",
+    "expected_terms_any": ["web", "software", "portal"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_rate_correction",
+    "language": "en",
+    "history": [
+      {"role": "user", "content": "Find a Python developer under 60 USD per hour."},
+      {"role": "assistant", "content": "I will search with that hourly ceiling."}
+    ],
+    "question": "Actually show me people above 60 dollars per hour.",
+    "expected_route": "match",
+    "expected_terms_any": ["python", "developer"],
+    "expected_constraint_fields": ["min_hourly_rate", "currency"]
+  },
+  {
+    "id": "en_persisted_location",
+    "language": "en",
+    "confirmed_constraints": [
+      {"field": "location", "value": "Portugal", "source_quote": "in Portugal"}
+    ],
+    "question": "They should also be available now.",
+    "expected_route": "match",
+    "expected_terms_any": ["professional", "freelancer", "available"],
+    "expected_constraint_fields": ["location", "availability_status"]
+  },
+  {
+    "id": "en_remove_location",
+    "language": "en",
+    "confirmed_constraints": [
+      {"field": "location", "value": "Portugal", "source_quote": "in Portugal"}
+    ],
+    "question": "Search worldwide now; location no longer matters.",
+    "expected_route": "match",
+    "expected_terms_any": ["professional", "freelancer"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_mobile_app",
+    "language": "en",
+    "question": "I need an iOS and Android app for fitness coaching.",
+    "expected_route": "match",
+    "expected_terms_any": ["mobile", "flutter", "ios", "android"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_physical_house",
+    "language": "en",
+    "question": "I need a physical house designed and built.",
+    "expected_route": "match",
+    "expected_terms_any": ["architect", "architecture", "engineer", "construction"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_marketing_campaign",
+    "language": "en",
+    "question": "Help launch a digital marketing campaign for a new café.",
+    "expected_route": "match",
+    "expected_terms_any": ["marketing", "social", "seo", "advertising"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "fr_video",
+    "language": "fr",
+    "question": "J'ai besoin d'une vidéo promotionnelle courte pour mon hôtel.",
+    "expected_route": "match",
+    "expected_terms_any": ["video", "production", "editor"],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_database_count",
+    "language": "en",
+    "question": "How many available freelancers are in the database?",
+    "expected_route": "sql",
+    "expected_terms_any": [],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "fr_greeting",
+    "language": "fr",
+    "question": "Bonjour, que peux-tu faire ?",
+    "expected_route": "conversation",
+    "expected_terms_any": [],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_vague_request",
+    "language": "en",
+    "question": "I need someone to help with something important.",
+    "expected_route": "clarify",
+    "expected_terms_any": [],
+    "expected_constraint_fields": []
+  },
+  {
+    "id": "en_no_fit_cryogenics",
+    "language": "en",
+    "question": "Find a cryogenic quantum sensor fabrication specialist.",
+    "expected_route": "match",
+    "expected_terms_any": ["cryogenic", "quantum", "engineer", "scientist"],
+    "expected_constraint_fields": [],
+    "expected_full_status": "no_supported_matches"
+  },
+  {
+    "id": "fr_no_fit_marine",
+    "language": "fr",
+    "question": "Je cherche un ingénieur naval spécialisé dans les coques de sous-marins.",
+    "expected_route": "match",
+    "expected_terms_any": ["naval", "marine", "engineer", "ingénieur"],
+    "expected_constraint_fields": [],
+    "expected_full_status": "no_supported_matches"
+  }
+]

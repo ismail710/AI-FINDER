@@ -15,7 +15,7 @@ For the first version, avoid complex vector-search infrastructure. With a contro
 | Database | Cloud Firestore | Store freelancer profiles, client requests, matches, invitations, availability, and responses. |
 | Authentication | Firebase Authentication | Sign in clients, freelancers, and administrators. |
 | Backend and matching logic | Cloud Functions for Firebase (TypeScript) | Securely call the AI, calculate rankings and budget estimates, and send invitations. |
-| AI analysis | OpenAI API | Extract structured requirements from client free-text requests and create match explanations. |
+| AI analysis | Hugging Face Inference Providers | Extract structured requirements from client free-text requests and create match explanations with an open model. |
 | File storage | Firebase Cloud Storage | Store freelancer CVs, portfolio images, and supporting documents. |
 | Email invitations | Resend | Send an invitation to each recommended freelancer with Accept, Decline, or Question actions. |
 | Real-time updates | Firestore listeners | Show the client immediately when a freelancer views, accepts, declines, or messages about an invitation. |
@@ -42,7 +42,7 @@ Remove freelancers who do not meet non-negotiable requirements, such as a requir
 1. An administrator imports 20-50 freelancer profiles into Firestore.
 2. A freelancer can sign in and update availability, available start date, weekly capacity, and rate.
 3. A client submits a description of their problem, skills needed, deadline, team size, and budget.
-4. A Cloud Function sends the description to the OpenAI API and saves structured requirements.
+4. A Cloud Function sends the description to a Hugging Face Inference Provider and saves structured requirements.
 5. The same function filters and scores eligible freelancers from Firestore.
 6. The client receives a ranked shortlist, a recommended solution or team, and an estimated price range.
 7. The client sends invitations to selected freelancers.

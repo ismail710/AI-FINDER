@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freelancer Finder · Test console</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0a101b;--panel:#111b2b;--panel2:#152238;--line:#293950;--text:#eaf1fa;--muted:#a5b5c8;--accent:#75ddc4;--accent2:#44b89e;--warn:#f2c26d;--bad:#f39395}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#183d51 0,transparent 40%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:wait;opacity:.65}
+    .shell{max-width:1220px;margin:auto;padding:32px 24px 72px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:28px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(30px,4vw,48px);line-height:1.12;letter-spacing:-.045em;margin:8px 0 10px}p{margin:0}.intro{color:var(--muted);max-width:650px}.badge{border:1px solid var(--line);background:#13283b;border-radius:999px;padding:7px 13px;font-size:12px;white-space:nowrap;color:var(--muted)}.badge.good{color:var(--accent);border-color:#2f7b70}.badge.bad{color:var(--warn);border-color:#8c6843}
+    .stats{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}.stat{background:#0e1a2a;border:1px solid var(--line);border-radius:12px;padding:11px 16px;min-width:145px}.stat strong{font-size:20px;display:block;line-height:1.2}.stat span{font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);gap:22px;align-items:start}.panel{background:linear-gradient(145deg,var(--panel),#0e1827);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 45px #0002}.controls{padding:23px}.results{padding:23px;min-height:460px}.panel h2{margin:0 0 16px;font-size:21px;letter-spacing:-.02em}.tabs{display:flex;gap:7px;background:#0b1422;padding:5px;border-radius:10px;margin-bottom:20px}.tab{flex:1;border:0;border-radius:7px;color:var(--muted);background:transparent;padding:9px 8px;font-weight:650}.tab.active{background:#24384b;color:var(--text)}label{display:block;font-size:12px;font-weight:700;color:#c4d3e2;margin:0 0 7px}textarea,input,select{width:100%;background:#0a1523;color:var(--text);border:1px solid #33445b;border-radius:9px;padding:11px 12px;outline:none}textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #75ddc420}textarea{min-height:118px;resize:vertical}input::placeholder,textarea::placeholder{color:#73869b}.field{margin-bottom:16px}.field small{display:block;color:var(--muted);margin-top:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.filters{border-top:1px solid var(--line);margin-top:21px;padding-top:18px}.filters h3{margin:0 0 14px;font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}.primary{width:100%;border:0;border-radius:10px;background:var(--accent);color:#09251f;font-weight:800;padding:12px 16px}.primary:hover{background:#a2f0dc}.samples{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.sample{background:#1a2b3d;color:#cde2e8;border:1px solid #365065;border-radius:999px;padding:5px 10px;font-size:12px}.sample:hover{border-color:var(--accent)}
+    .results-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.results-head h2{margin-bottom:4px}.hint{color:var(--muted);font-size:13px}.empty{border:1px dashed #3b526a;border-radius:14px;margin-top:21px;padding:50px 24px;text-align:center;color:var(--muted)}.empty .icon{font-size:34px;display:block;margin-bottom:8px}.notice{border-radius:11px;padding:11px 13px;margin:18px 0;background:#172d36;color:#b8e6d8;border:1px solid #326255}.notice.warn{background:#33291d;color:#f4d7a8;border-color:#765c35}.notice.error{background:#392229;color:#ffd1d2;border-color:#82414a}.result-list{display:grid;gap:13px;margin-top:17px}.result{border:1px solid var(--line);border-radius:13px;padding:17px;background:#142136}.result-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.result h3{margin:0;font-size:18px}.sub{color:var(--muted);font-size:13px;margin:3px 0 0}.score{font-variant-numeric:tabular-nums;color:var(--accent);font-size:21px;font-weight:800;white-space:nowrap}.score span{display:block;font-size:10px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:.08em}.chips{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0}.chip{border-radius:999px;background:#22354b;padding:4px 9px;color:#cde1ef;font-size:11px}.chip.ok{background:#173c37;color:#a3edcf}.detail{display:grid;grid-template-columns:1fr 1fr;gap:10px;border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-size:12px;color:var(--muted)}.detail strong{color:var(--text);font-weight:650}.answer{white-space:pre-wrap;line-height:1.7;background:#0c1827;border-radius:12px;padding:18px;margin-top:20px;border:1px solid var(--line)}.footer{color:#7f92a7;font-size:12px;margin-top:18px} [hidden]{display:none!important}
+    .chat-controls h2{margin:0 0 8px;font-size:20px}.chat-controls p{color:var(--muted);font-size:13px}.chat-samples{display:grid;gap:8px;margin:20px 0}.chat-samples button{text-align:left;border:1px solid #365065;background:#17283b;color:var(--text);border-radius:10px;padding:11px 12px}.chat-samples button:hover{border-color:var(--accent)}.secondary{border:1px solid var(--line);color:var(--muted);background:transparent;border-radius:9px;padding:9px 12px}.chat-panel{display:flex;flex-direction:column;min-height:560px;max-height:760px;padding:0}.chat-head{padding:19px 22px;border-bottom:1px solid var(--line)}.chat-head h2{margin:0;font-size:20px}.chat-head p{color:var(--muted);font-size:12px}.chat-messages{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:14px}.chat-welcome{border:1px dashed #3b526a;border-radius:13px;color:var(--muted);padding:32px 20px;text-align:center;margin:auto 0}.bubble{max-width:86%;padding:13px 15px;border-radius:14px;background:#1b2d42;border:1px solid #31465c}.bubble-user{align-self:flex-end;background:#205044;border-color:#367466}.bubble-assistant,.bubble-error{align-self:flex-start}.bubble-error{background:#392229;border-color:#82414a}.bubble-label{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}.bubble-user .bubble-label{color:#bcf5df}.bubble-body{white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere}.bubble-meta{font-size:11px;color:var(--muted);border-top:1px solid #ffffff20;margin-top:11px;padding-top:8px}.chat-match{border-top:1px solid #ffffff20;padding-top:9px;margin-top:9px;font-size:12px}.chat-match strong{color:var(--text)}.chat-form{display:flex;gap:10px;align-items:end;padding:16px;border-top:1px solid var(--line);background:#0e1a2a;border-radius:0 0 18px 18px}.chat-form textarea{min-height:48px;max-height:120px;resize:vertical}.chat-form button{border:0;background:var(--accent);color:#09251f;font-weight:800;border-radius:9px;padding:12px 17px;white-space:nowrap}
+    @media(max-width:790px){.grid{grid-template-columns:1fr}.top{flex-direction:column}.results{min-height:300px}.chat-panel{min-height:470px}}@media(max-width:450px){.shell{padding:22px 14px 50px}.controls,.results{padding:17px}.chat-panel{padding:0}.two{grid-template-columns:1fr}.stat{min-width:calc(50% - 5px)}.bubble{max-width:96%}.chat-form{padding:10px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div><div class="eyebrow">Local test console</div><h1>Freelancer Finder</h1><p class="intro">Chat about the freelancers you need, ask follow-up questions, or use the search and SQL forms to inspect the underlying results.</p></div>
+      <div id="token-badge" class="badge">Checking connection…</div>
+    </header>
+    <div class="stats" aria-label="Database summary">
+      <div class="stat"><strong id="count-freelancers">—</strong><span>freelancers</span></div>
+      <div class="stat"><strong id="count-embeddings">—</strong><span>embedding rows</span></div>
+      <div class="stat"><strong id="count-projects">—</strong><span>projects</span></div>
+    </div>
+    <div class="grid">
+      <section class="panel controls" aria-label="Search controls">
+        <div class="tabs" role="tablist" aria-label="Query mode"><button class="tab active" id="tab-chat" type="button" role="tab" aria-selected="true">Chat</button><button class="tab" id="tab-match" type="button" role="tab" aria-selected="false">Match</button><button class="tab" id="tab-sql" type="button" role="tab" aria-selected="false">SQL</button></div>
+        <div id="chat-controls" class="chat-controls"><h2>Ask naturally</h2><p>Describe a client project or ask about freelancer availability, skills, rates, and public work. Previous questions are stored locally and restored when you return.</p><div class="chat-samples"><button type="button" data-chat-sample="Find me an available Python developer with Django skills under 60 USD per hour.">Find an available Django developer under $60/hour</button><button type="button" data-chat-sample="Who has experience with mobile product design?">Find a mobile product designer</button><button type="button" data-chat-sample="How many freelancers are available?">Count available freelancers</button></div><button id="new-chat" class="secondary" type="button">New chat</button></div>
+        <form id="query-form" hidden>
+          <div class="field"><label for="question" id="question-label">Client request</label><textarea id="question" required maxlength="2000" placeholder="I need a Python developer to build a Django API backed by PostgreSQL">I need a Python developer to build a Django API backed by PostgreSQL</textarea><div id="samples" class="samples"><button class="sample" type="button" data-sample="I need a Python developer to build a Django API backed by PostgreSQL">Django API</button><button class="sample" type="button" data-sample="I need a designer for a mobile product and brand identity">Product design</button></div></div>
+          <div id="match-fields">
+            <div class="filters"><h3>Hard requirements</h3>
+              <div class="two"><div class="field"><label for="availability">Availability</label><select id="availability"><option value="">Any</option><option value="available">Available</option><option value="partial">Partial</option><option value="unavailable">Unavailable</option></select></div><div class="field"><label for="top">Matches to show</label><input id="top" type="number" min="1" max="20" value="5"></div></div>
+              <div class="field"><label for="work-field">Work field</label><input id="work-field" placeholder="Exact field name"></div>
+              <div class="two"><div class="field"><label for="min-rate">Min hourly rate</label><input id="min-rate" type="number" min="0" step="0.01" placeholder="40"></div><div class="field"><label for="rate">Max hourly rate</label><input id="rate" type="number" min="0" step="0.01" placeholder="60"></div></div>
+              <div class="field"><label for="currency">Currency for rate filters</label><input id="currency" placeholder="USD"></div>
+              <div class="field"><label for="location">Location contains</label><input id="location" placeholder="Remote or city"></div>
+              <div class="field"><label for="skills">Required skills</label><input id="skills" placeholder="Python, Django"><small>Separate skills with commas. These are checked against profile and public project records.</small></div>
+            </div>
+          </div>
+          <button class="primary" id="submit" type="submit">Find verified matches</button>
+        </form>
+      </section>
+      <section id="search-view" class="panel results" aria-live="polite" aria-label="Results" hidden>
+        <div class="results-head"><div><h2 id="results-title">Matches</h2><p class="hint" id="results-subtitle">Run a search to see ranked, verified candidates.</p></div></div>
+        <div id="output"><div class="empty"><span class="icon">⌕</span>Your search results will appear here.</div></div>
+        <p class="footer">This local database contains fictional sample freelancers and projects. Similarity scores show text closeness, not a probability of success.</p>
+      </section>
+      <section id="chat-view" class="panel chat-panel" aria-label="Freelancer chatbot">
+        <div class="chat-head"><h2>Freelancer assistant</h2><p>Semantic matches are checked against SQLite. Conversation memory is on.</p></div>
+        <div id="chat-messages" class="chat-messages" role="log" aria-live="polite"><div class="chat-welcome">Tell me what kind of freelancer you need, or choose an example on the left.</div></div>
+        <form id="chat-form" class="chat-form"><label for="chat-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Chat message</label><textarea id="chat-input" required maxlength="2000" rows="2" placeholder="Ask about freelancers or projects…"></textarea><button id="chat-send" type="submit">Send</button></form>
+      </section>
+    </div>
+  </main>
+  <script>
+    const $ = id => document.getElementById(id);
+    let mode = 'chat';
+    const output = $('output');
+    const chatMessages = $('chat-messages');
+    function newConversationId() {
+      return globalThis.crypto?.randomUUID
+        ? globalThis.crypto.randomUUID()
+        : `chat-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+    }
+    let conversationId = localStorage.getItem('freelancerFinderConversationId') || newConversationId();
+    localStorage.setItem('freelancerFinderConversationId', conversationId);
+    function node(tag, className, text) { const el = document.createElement(tag); if (className) el.className = className; if (text !== undefined) el.textContent = String(text); return el; }
+    function add(parent, tag, className, text) { const el = node(tag, className, text); parent.append(el); return el; }
+    function message(text, kind='') { output.replaceChildren(add(node('div'), 'div', 'notice ' + kind, text)); }
+    function setMode(next) {
+      mode = next;
+      for (const option of ['chat','match','sql']) { const tab = $('tab-' + option); tab.classList.toggle('active', option === mode); tab.setAttribute('aria-selected', String(option === mode)); }
+      $('chat-controls').hidden = mode !== 'chat'; $('chat-view').hidden = mode !== 'chat';
+      $('query-form').hidden = mode === 'chat'; $('search-view').hidden = mode === 'chat';
+      if (mode === 'chat') { $('chat-input').focus(); return; }
+      $('match-fields').hidden = mode !== 'match'; $('samples').hidden = mode !== 'match';
+      $('question-label').textContent = mode === 'match' ? 'Client request' : 'Database question';
+      $('question').placeholder = mode === 'match' ? 'Describe the freelancer you need' : 'How many freelancers are available?';
+      $('question').value = mode === 'match' ? 'I need a Python developer to build a Django API backed by PostgreSQL' : 'How many freelancers are available?';
+      $('submit').textContent = mode === 'match' ? 'Find verified matches' : 'Ask database';
+      $('results-title').textContent = mode === 'match' ? 'Matches' : 'SQL answer';
+      $('results-subtitle').textContent = mode === 'match' ? 'Run a search to see ranked, verified candidates.' : 'Ask a factual question about the database.';
+      output.replaceChildren(add(node('div'), 'div', 'empty', mode === 'match' ? 'Your search results will appear here.' : 'The database answer will appear here.'));
+    }
+    $('tab-chat').addEventListener('click', () => setMode('chat'));
+    $('tab-match').addEventListener('click', () => setMode('match'));
+    $('tab-sql').addEventListener('click', () => setMode('sql'));
+    document.querySelectorAll('[data-sample]').forEach(button => button.addEventListener('click', () => { $('question').value = button.dataset.sample; $('question').focus(); }));
+    function chatBubble(role, content, data=null) {
+      const welcome = chatMessages.querySelector('.chat-welcome'); if (welcome) welcome.remove();
+      const bubble = add(chatMessages, 'div', 'bubble ' + (role === 'user' ? 'bubble-user' : role === 'error' ? 'bubble-error' : 'bubble-assistant'));
+      add(bubble, 'div', 'bubble-label', role === 'user' ? 'You' : role === 'error' ? 'Request failed' : 'Freelancer assistant');
+      add(bubble, 'div', 'bubble-body', role === 'assistant' ? content.replace(/\*\*/g, '') : content);
+      if (data) {
+        const routeLabel = data.route === 'semantic' ? 'Used semantic retrieval, SQL constraints, and portfolio evidence' : data.route === 'sql' ? 'Used SQL lookup' : 'Used conversation context';
+        add(bubble, 'div', 'bubble-meta', routeLabel);
+        for (const note of (data.constraint_notes || [])) add(bubble, 'div', 'bubble-meta', note);
+        if (data.review) {
+          const review = data.review;
+          for (const decision of (review.decisions || []).filter(item => item.action === 'retry')) {
+            const action = decision.tool === 'none' ? 'rewrite the answer' : `use ${decision.tool} again`;
+            add(bubble, 'div', 'bubble-meta', `LLM reviewer requested to ${action}: ${decision.feedback}`);
+          }
+          const label = review.outcome === 'not_needed'
+            ? 'Direct database search'
+            : review.outcome === 'accepted'
+            ? `Portfolio evidence review accepted after ${review.attempts} search ${review.attempts === 1 ? 'attempt' : 'attempts'}`
+            : `Evidence review: ${review.outcome.replace(/_/g, ' ')} after ${review.attempts} search ${review.attempts === 1 ? 'attempt' : 'attempts'}`;
+          add(bubble, 'div', 'bubble-meta', label);
+        }
+        if (data.verification_status === 'partial') add(bubble, 'div', 'bubble-meta', 'Only some candidates passed every hard requirement.');
+        for (const match of (data.matches || []).slice(0, 5)) {
+          const card = add(bubble, 'div', 'chat-match');
+          add(card, 'strong', '', `${match.name} · ${match.currency || ''} ${match.hourly_rate == null ? 'rate not listed' : Number(match.hourly_rate).toFixed(2) + '/hour'}`);
+          add(card, 'div', '', `${match.location || 'Location not listed'} · semantic similarity ${Number(match.combined_score).toFixed(3)} · ${match.fit ? match.fit + ' fit' : 'SQL constraints checked'}`);
+        }
+      }
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return bubble;
+    }
+    $('new-chat').addEventListener('click', () => {
+      conversationId = newConversationId(); localStorage.setItem('freelancerFinderConversationId', conversationId); chatMessages.replaceChildren(add(node('div'), 'div', 'chat-welcome', 'New conversation started. Tell me what kind of freelancer you need.')); $('chat-input').value = ''; $('chat-input').focus();
+    });
+    document.querySelectorAll('[data-chat-sample]').forEach(button => button.addEventListener('click', () => { $('chat-input').value = button.dataset.chatSample; $('chat-form').requestSubmit(); }));
+    $('chat-input').addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); $('chat-form').requestSubmit(); } });
+    $('chat-form').addEventListener('submit', async event => {
+      event.preventDefault(); if ($('chat-send').disabled) return;
+      const input = $('chat-input'); const text = input.value.trim(); if (!text) return;
+      input.value = ''; input.disabled = true; $('chat-send').disabled = true;
+      $('new-chat').disabled = true;
+      chatBubble('user', text); const pending = chatBubble('assistant', 'Searching and reviewing the answer…');
+      try {
+        const response = await fetch('/api/chat', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,conversation_id:conversationId})});
+        const data = await response.json(); if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
+        const answer = data.answer || 'No answer returned.';
+        pending.remove(); chatBubble('assistant', answer, data);
+        if (data.conversation_id) { conversationId = data.conversation_id; localStorage.setItem('freelancerFinderConversationId', conversationId); }
+      } catch (error) { pending.remove(); chatBubble('error', error.message || 'Request failed.'); input.value = text; }
+      finally { input.disabled = false; $('chat-send').disabled = false; $('new-chat').disabled = false; input.focus(); }
+    });
+    async function status() {
+      try {
+        const response = await fetch('/api/status'); const data = await response.json(); if (!response.ok) throw new Error(data.error);
+        for (const field of ['freelancers','embeddings','projects']) $('count-' + field).textContent = data[field];
+        const badge = $('token-badge');
+        if (data.llm_provider === 'ollama') {
+          badge.textContent = `Local LLM: ${data.llm_model}` + (data.token_configured ? ' · HF embeddings ready' : ' · add HF_TOKEN for semantic search');
+          badge.className = 'badge ' + (data.token_configured ? 'good' : 'bad');
+        } else {
+          badge.textContent = data.token_configured ? `Hugging Face LLM: ${data.llm_model}` : 'Add HF_TOKEN to .env';
+          badge.className = 'badge ' + (data.token_configured ? 'good' : 'bad');
+        }
+      } catch (error) { const badge = $('token-badge'); badge.textContent = 'Database status unavailable'; badge.className = 'badge bad'; }
+    }
+    async function restoreConversation() {
+      try {
+        const response = await fetch(`/api/conversations/${encodeURIComponent(conversationId)}/messages`);
+        const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Memory unavailable');
+        if (!(data.messages || []).length) return;
+        chatMessages.replaceChildren();
+        for (const saved of data.messages) chatBubble(saved.role, saved.content);
+      } catch (error) {
+        console.warn('Conversation memory could not be restored:', error);
+      }
+    }
+    function renderMatch(data) {
+      output.replaceChildren();
+      const count = data.matches.length;
+      const line = `${count} verified ${count === 1 ? 'match' : 'matches'} · ${data.candidates_examined} candidates checked in ${data.attempts} ${data.attempts === 1 ? 'batch' : 'batches'}`;
+      add(output, 'div', 'notice' + (data.status === 'verified' ? '' : ' warn'), line);
+      if (!count) { add(output, 'div', 'empty', 'No freelancer passed every hard requirement. Adjust the filters and try again.'); return; }
+      if (data.status === 'partial') add(output, 'div', 'hint', 'Fewer than the requested number passed. Every candidate with a saved embedding was checked.');
+      const list = add(output, 'div', 'result-list');
+      data.matches.forEach((item, index) => {
+        const card = add(list, 'article', 'result'); const top = add(card, 'div', 'result-top'); const name = add(top, 'div');
+        add(name, 'h3', '', `${index + 1}. ${item.name}`); add(name, 'p', 'sub', `${item.work_field || 'Field not listed'} · ${item.location || 'Location not listed'}`);
+        const score = add(top, 'div', 'score', Number(item.combined_score).toFixed(3)); add(score, 'span', '', 'similarity');
+        const chips = add(card, 'div', 'chips'); add(chips, 'span', 'chip ok', 'Verified requirements'); add(chips, 'span', 'chip', item.availability_status);
+        for (const skill of (item.skills || []).slice(0, 8)) add(chips, 'span', 'chip', skill);
+        const detail = add(card, 'div', 'detail');
+        add(detail, 'div', '', `ID: ${item.freelancer_id}`);
+        add(detail, 'div', '', item.hourly_rate == null ? 'Rate: not listed' : `Rate: ${item.currency || ''} ${Number(item.hourly_rate).toFixed(2)}/hour`);
+        add(detail, 'div', '', `Profile score: ${Number(item.profile_score).toFixed(3)}`);
+        add(detail, 'div', '', item.project_score == null ? 'Project score: no vector' : `Project score: ${Number(item.project_score).toFixed(3)}`);
+        add(card, 'p', 'sub', `Example public project: ${item.sample_project || 'none'}`);
+      });
+    }
+    $('query-form').addEventListener('submit', async event => {
+      event.preventDefault(); const activeMode = mode; const button = $('submit'); button.disabled = true; button.textContent = activeMode === 'match' ? 'Checking candidates…' : 'Asking agent…';
+      message('Working on your request…');
+      const payload = activeMode === 'sql' ? {question:$('question').value.trim()} : {
+        query:$('question').value.trim(), top:Number($('top').value), availability_status:$('availability').value || null,
+        work_field:$('work-field').value.trim() || null, min_hourly_rate:$('min-rate').value === '' ? null : Number($('min-rate').value), max_hourly_rate:$('rate').value === '' ? null : Number($('rate').value),
+        currency:$('currency').value.trim() || null, location:$('location').value.trim() || null,
+        required_skills:$('skills').value.split(',').map(value => value.trim()).filter(Boolean)
+      };
+      try {
+        const response = await fetch(activeMode === 'match' ? '/api/match' : '/api/sql', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        const data = await response.json(); if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
+        if (activeMode === 'match') renderMatch(data); else { output.replaceChildren(); add(output, 'div', 'answer', data.answer); if (data.query) add(output, 'p', 'footer', `Executed SQL: ${data.query} · parameters: ${JSON.stringify(data.parameters || [])}`); else add(output, 'p', 'footer', 'Answered by the SQL agent.'); }
+      } catch (error) { message(error.message || 'Request failed.', 'error'); }
+      finally { button.disabled = false; button.textContent = activeMode === 'match' ? 'Find verified matches' : 'Ask database'; }
+    });
+    status(); restoreConversation();
+  </script>
+</body>
+</html>
